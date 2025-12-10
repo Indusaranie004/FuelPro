@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    background-image: url('../images/RefillBG.jpg'); /* Background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background */
+}
+
+.container {
+    width: 400px; /* Fixed width for a square form */
+    height: 400px; /* Fixed height for a square box */
+    background: rgba(255, 255, 255, 0.8); /* Increased transparency */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 20px; /* Reduced font size for the heading */
+    margin-bottom: 20px; /* Adjusted margin */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%; /* Ensures all inputs, including text box, are of the same width */
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px; /* Added space between the last dropdown and submit button */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
