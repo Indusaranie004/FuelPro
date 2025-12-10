@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <display-name>FuelStationManagementSystem</display-name>
+
+    <welcome-file-list>
+        <welcome-file>Refill.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>RefillServlet</servlet-name>
+        <servlet-class>RefillCtrl.RefillServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RefillServlet</servlet-name>
+        <url-pattern>/RefillServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomerInsertServlet</servlet-name>
+        <servlet-class>Customer.CustomerInsertServlet</servlet-class>
+    </servlet>
+     
+    <servlet-mapping>
+        <servlet-name>CustomerInsertServlet</servlet-name>
+        <url-pattern>/CustomerInsertServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>
