@@ -8,3 +8,14 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+#Read_me
+/API_DEPLOYMENT_FIX.md/
+/ARCHITECHTURE.md/
+/DASHBOARD_404_FIX.md/
+/database_setup.sql/
+/INTELLIJ_DEPLOYMENT_FIX.md/
+/WSO2_INTEGRATION_GUIDE.md/
+/WSO2_INTEGRATION_SUMMARY.md/
+/WSO2_MIGRATION_EXAMPLES.md/
+/WSO2_QUICK_START.md/
+

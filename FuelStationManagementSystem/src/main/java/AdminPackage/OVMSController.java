@@ -26,6 +26,12 @@ public class OVMSController extends HttpServlet {
 		String contextPath = req.getContextPath();
 		String pathInfo = path.substring(contextPath.length());
 		
+		// CRITICAL: Exclude API endpoints - let REST API servlets handle them
+		if (pathInfo.startsWith("/api/")) {
+			// Do nothing - let other servlets handle API requests
+			return;
+		}
+		
 		// Exclude static resources (CSS, JS, images, fonts, etc.) - let Tomcat's default servlet handle them
 		if (pathInfo.startsWith("/assets/") ||
 		    pathInfo.startsWith("/CSS/") || 
@@ -57,8 +63,21 @@ public class OVMSController extends HttpServlet {
 		
 		// For ALL JSP files, forward to them directly
 		if (pathInfo.endsWith(".jsp")) {
+			System.out.println("JSP file requested: " + pathInfo);
 			RequestDispatcher rd = req.getRequestDispatcher(pathInfo);
-			rd.forward(req, res);
+			if (rd == null) {
+				System.err.println("RequestDispatcher is NULL for JSP: " + pathInfo);
+				res.sendError(HttpServletResponse.SC_NOT_FOUND, "JSP file not found: " + pathInfo);
+				return;
+			}
+			System.out.println("Forwarding to JSP: " + pathInfo);
+			try {
+				rd.forward(req, res);
+			} catch (Exception e) {
+				System.err.println("Error forwarding to JSP " + pathInfo + ": " + e.getMessage());
+				e.printStackTrace();
+				res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error loading JSP: " + e.getMessage());
+			}
 			return;
 		}
 		
@@ -73,23 +92,36 @@ public class OVMSController extends HttpServlet {
 		if ("/LoginAdmin".equals(act)) {
 			System.out.println("Login route matched: " + act);
 			checkLogin(req,res);
+			return;
 		} else if ("/dashboard".equals(act)) {
+			System.out.println("Dashboard route matched: " + act);
 			showDashboard(req,res);
+			return;
 		} else if ("/insertService".equals(act)) {
 			insertService(req,res);
+			return;
 		} else if ("/update".equals(act)) {
 			showUpdateForm(req,res);
+			return;
 		} else if ("/updateService".equals(act)) {
 			updateService(req,res);
+			return;
 		} else if ("/delete".equals(act)) {
 			deleteService(req,res);
+			return;
 		} else if ("/logout".equals(act)) {
 			logoutAdmin(req,res);
+			return;
 		} else if ("/".equals(act) || act.isEmpty()) {
 			// Redirect root to home page
 			res.sendRedirect("pages/user/Home.jsp");
+			return;
 		}
 		// For all other paths, do nothing - let them be handled by other servlets/JSPs
+		// If we reach here and no response was sent, return 404
+		if (!res.isCommitted()) {
+			res.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
 		
 	}
 
@@ -159,12 +191,31 @@ public class OVMSController extends HttpServlet {
 	}
 
 	private void showDashboard(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Service> relist=new ArrayList<>();
-		
-		relist = dao.getAllServices();
-		req.setAttribute("relist", relist);
-		RequestDispatcher rd = req.getRequestDispatcher("pages/admin/AdminDashboard.jsp");
-		rd.forward(req, res);
+		try {
+			System.out.println("showDashboard called");
+			List<Service> relist=new ArrayList<>();
+			
+			relist = dao.getAllServices();
+			System.out.println("Retrieved " + relist.size() + " services");
+			req.setAttribute("relist", relist);
+			
+			String jspPath = "pages/admin/AdminDashboard.jsp";
+			System.out.println("Forwarding to: " + jspPath);
+			RequestDispatcher rd = req.getRequestDispatcher(jspPath);
+			
+			if (rd == null) {
+				System.err.println("RequestDispatcher is null for: " + jspPath);
+				res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "JSP file not found: " + jspPath);
+				return;
+			}
+			
+			rd.forward(req, res);
+			System.out.println("Forward completed");
+		} catch (Exception e) {
+			System.err.println("Error in showDashboard: " + e.getMessage());
+			e.printStackTrace();
+			res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error loading dashboard: " + e.getMessage());
+		}
 	}
 
 	private void checkLogin(HttpServletRequest req, HttpServletResponse res) throws IOException {
