@@ -17,10 +17,47 @@
             color: black; /* Set text color to black */
             font-family: Arial, sans-serif; /* Set font type to match Register page */
             margin: 0; /* Remove default margin */
-            height: 100vh; /* Full height of the viewport */
-            display: flex; /* Use flexbox for alignment */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            min-height: 100vh; /* Full height of the viewport */
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 240px;
+            background: #111; /* align with header/footer tone */
+            color: #fff;
+            padding: 24px 18px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-sizing: border-box;
+        }
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: block;
+        }
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .main-area {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             border: 1px solid #ffc107; /* Yellow border around container */
@@ -104,6 +141,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/form-theme.css">
 </head>
 <body class="refill-page">
+    <div class="sidebar">
+        <div class="sidebar-title">FuelPro</div>
+        <a href="<%= request.getContextPath() %>/pages/user/HomeLogged.jsp">Home</a>
+        <a href="<%= request.getContextPath() %>/pages/user/profile.jsp">Profile</a>
+        <a href="<%= request.getContextPath() %>/pages/auth/login.jsp">Login</a>
+        <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">Register</a>
+        <a href="<%= request.getContextPath() %>/pages/user/Refill.jsp">Refill</a>
+        <a href="<%= request.getContextPath() %>/pages/payment/addcart.jsp">Payment</a>
+    </div>
+    <div class="main-area">
     <div class="refill-wrapper">
     <div class="container">
         <h2>User Profile</h2>
@@ -162,6 +209,7 @@
             }
         %>
         
+    </div>
     </div>
     </div>
 

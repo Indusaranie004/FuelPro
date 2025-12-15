@@ -31,3 +31,8 @@ WSO2_INTEGRATION_GUIDE.md
 WSO2_INTEGRATION_SUMMARY.md
 WSO2_MIGRATION_EXAMPLES.md
 WSO2_QUICK_START.md
+ARCHITECTURE.md
+database_setup.sql
+
+# Ignore all Markdown files
+*.md

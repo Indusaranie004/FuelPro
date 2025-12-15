@@ -26,7 +26,7 @@
         %>
         <p><strong>Fuel Station:</strong> <%= fuelStation != null ? fuelStation : "N/A" %></p>
         <p><strong>Fuel Type:</strong> <%= fuelType != null ? fuelType : "N/A" %></p>
-        <p><strong>Total Price:</strong> $<%= String.format("%.2f", totalPrice) %></p>
+        <p><strong>Amount:</strong> <%= amount != null && !amount.isEmpty() ? amount : "N/A" %></p>
 
         <%
             int referenceNumber = (int)(Math.random() * 10000);

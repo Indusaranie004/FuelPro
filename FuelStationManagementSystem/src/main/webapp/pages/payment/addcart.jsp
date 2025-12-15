@@ -80,10 +80,67 @@
             background-color: #f9f9f9;
             box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 240px;
+            background: #111; /* align with header/footer tone */
+            color: #fff;
+            padding: 24px 18px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-sizing: border-box;
+        }
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: block;
+        }
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .main-area {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/form-theme.css">
 </head>
+<%
+    // Pre-fill amount from previous step if available
+    String refillAmount = request.getParameter("amount");
+    if (refillAmount == null) {
+        refillAmount = "";
+    }
+%>
 <body class="refill-page">
+<div class="sidebar">
+    <div class="sidebar-title">FuelPro</div>
+    <a href="<%= request.getContextPath() %>/pages/user/HomeLogged.jsp">Home</a>
+    <a href="<%= request.getContextPath() %>/pages/user/profile.jsp">Profile</a>
+    <a href="<%= request.getContextPath() %>/pages/auth/login.jsp">Login</a>
+    <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">Register</a>
+    <a href="<%= request.getContextPath() %>/pages/user/Refill.jsp">Refill</a>
+    <a href="<%= request.getContextPath() %>/pages/payment/addcart.jsp">Payment</a>
+</div>
+<div class="main-area">
 <div class="refill-wrapper">
 <div class="form-container">
     <h2>Enter Card Details</h2>
@@ -139,7 +196,7 @@
             </tr>
             <tr>
                 <td>Amount :</td>
-                <td><input type="text" name="amount" required></td>
+                <td><input type="text" name="amount" value="<%= refillAmount %>" required></td>
             </tr>
         </table>
 
@@ -147,6 +204,7 @@
         <input type="submit" value="Submit">
     </form>
     <div id="paymentMessage" style="display:none; margin-top: 20px; padding: 10px; border-radius: 5px; text-align: center;"></div>
+</div>
 </div>
 </div>
 

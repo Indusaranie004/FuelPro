@@ -11,7 +11,7 @@ body {
 }
 
 .navbar {
-    background-color: #333; /* Same color as the footer */
+    background-color: #111; /* Match header/footer tone */
     padding: 30px; /* Increased height */
     display: flex;
     justify-content: space-between;

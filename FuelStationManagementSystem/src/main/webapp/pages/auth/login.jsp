@@ -14,12 +14,49 @@
             background-size: cover; /* Cover the entire background */
             background-position: center; /* Center the background image */
             background-repeat: no-repeat; /* Prevent image repetition */
-            height: 100vh; /* Full height of the viewport */
+            min-height: 100vh; /* Full height of the viewport */
             margin: 0; /* Remove default margin */
-            display: flex; /* Use flexbox for layout */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
             font-family: Arial, sans-serif; /* Set font for the page */
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 240px;
+            background: #111; /* slightly softer than pure black to match header/footer tone */
+            color: #fff;
+            padding: 24px 18px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-sizing: border-box;
+        }
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: block;
+        }
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .main-area {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             width: 400px; /* Fixed width for the form */
@@ -94,6 +131,17 @@
 </head>
 <body class="refill-page">
 
+    <div class="sidebar">
+        <div class="sidebar-title">FuelPro</div>
+        <a href="<%= request.getContextPath() %>/pages/user/HomeLogged.jsp">Home</a>
+        <a href="<%= request.getContextPath() %>/pages/user/profile.jsp">Profile</a>
+        <a href="<%= request.getContextPath() %>/pages/auth/login.jsp">Login</a>
+        <a href="<%= request.getContextPath() %>/pages/auth/register.jsp">Register</a>
+        <a href="<%= request.getContextPath() %>/pages/user/Refill.jsp">Refill</a>
+        <a href="<%= request.getContextPath() %>/pages/payment/addcart.jsp">Payment</a>
+    </div>
+
+    <div class="main-area">
     <div class="refill-wrapper">
     <div class="container">
         <h2 class="card-title">Login</h2>
@@ -128,6 +176,7 @@
                 <a href="${pageContext.request.contextPath}/pages/auth/register.jsp">Don't have an account? Register here</a>
             </div>
         </form>
+    </div>
     </div>
     </div>
 
